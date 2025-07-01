@@ -44,7 +44,7 @@
   "url": "https://github.com/CodaBool/material_plane",
   "readme": "https://github.com/CodaBool/material_plane",
   "manifest": "https://raw.githubusercontent.com/CodaBool/material_plane/refs/heads/main/module.json",
-  "download": "https://github.com/codabool/material_plane/releases/download/v3.2.4_pre1/module.zip",
+  "download": "https://github.com/CodaBool/material_plane/archive/v3.2.4_pre1.zip",
   "id": "MaterialPlane",
   "compatibility": {
     "minimum": "12",
