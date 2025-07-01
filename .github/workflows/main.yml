@@ -1,0 +1,24 @@
+permissions:
+  contents: write
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # https://github.com/marketplace/actions/checkout
+      - uses: actions/checkout@v4
+      - name: get version
+        run: |
+          echo "version=$(cat module.json | jq -r .version)" >> $GITHUB_ENV
+          echo "minimum=$(cat module.json | jq -r .compatibility.minimum)" >> $GITHUB_ENV
+      - name: cleanup and zip
+        run: |
+          rm -rf .git .github
+          rm *.md
+          zip -r MaterialPlane .
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ env.version }}
