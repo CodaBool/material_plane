@@ -33,7 +33,7 @@ export function setSelectElement(id, value) {
 
 export function roundFloat(num, significance) {
   const multiplier = Math.pow(10, significance);
-  return Math.round(multiplier*num)/multiplier;
+  return Math.round(multiplier * num) / multiplier;
 }
 
 export function activateControl(controlName) {
@@ -56,56 +56,56 @@ export function updatePowerState(data) {
 
   if (data.chargerStatus == "Charging") {
     icon = 'fas fa-battery-bolt';
-    batteryColor = "#00FF00"; 
+    batteryColor = "#00FF00";
   }
   else if (battery >= 80) {
-      icon = 'fas fa-battery-full';
-      batteryColor = "#00FF00";
+    icon = 'fas fa-battery-full';
+    batteryColor = "#00FF00";
   }
   else if (battery >= 60 && battery < 80) {
-      icon = 'fas fa-battery-three-quarters';
-      batteryColor = "#B9FF00";
+    icon = 'fas fa-battery-three-quarters';
+    batteryColor = "#B9FF00";
   }
   else if (battery >= 40 && battery < 60) {
-      icon = 'fas fa-battery-half';
-      batteryColor = "#F0FF00";
+    icon = 'fas fa-battery-half';
+    batteryColor = "#F0FF00";
   }
   else if (battery >= 20 && battery < 40) {
-      icon = 'fas fa-battery-quarter';
-      batteryColor = "#FF9000";
+    icon = 'fas fa-battery-quarter';
+    batteryColor = "#FF9000";
   }
   else if (battery < 20) {
-      icon = 'fas fa-battery-empty';
-      batteryColor = "#FF0000";
+    icon = 'fas fa-battery-empty';
+    batteryColor = "#FF0000";
   }
-  
+
   const playersElement = compatibilityHandler.playersElement();
   if (playersElement && document.getElementById("batteryLabel") == null) {
-      
-      let batteryIcon = document.createElement("i");
-      batteryIcon.id = "batteryIcon";
-      batteryIcon.style.fontSize = "0.75em";
-      let batteryLabel = document.createElement("bat");
-      batteryLabel.id = "batteryLabel";
-      batteryLabel.style.fontSize = "0.8em";
 
-      playersElement.after(batteryLabel);
-      playersElement.after(batteryIcon);
+    let batteryIcon = document.createElement("i");
+    batteryIcon.id = "batteryIcon";
+    batteryIcon.style.fontSize = "0.75em";
+    let batteryLabel = document.createElement("bat");
+    batteryLabel.id = "batteryLabel";
+    batteryLabel.style.fontSize = "0.8em";
+
+    playersElement.after(batteryLabel);
+    playersElement.after(batteryIcon);
   }
-  
+
   if (playersElement) {
     document.getElementById("batteryLabel").innerHTML = `${battery}%`;
-    document.getElementById("batteryIcon").className = icon; 
+    document.getElementById("batteryIcon").className = icon;
     document.getElementById("batteryIcon").style.color = batteryColor;
   }
-  
+
 }
 
 export function configureDebug(data) {
-  for (const [key,value] of Object.entries(data)) {
+  for (const [key, value] of Object.entries(data)) {
     debugSettings[key] = value;
   }
-  console.log(`MP Debug - Configured to`,debugSettings)
+  console.log(`MP Debug - Configured to`, debugSettings)
 }
 
 export function debug(type, message) {
@@ -115,12 +115,12 @@ export function debug(type, message) {
 export function compareVersions(checkedVersion, requiredVersion) {
   requiredVersion = requiredVersion.split(".");
   checkedVersion = checkedVersion.split(".");
-  
-  for (let i=0; i<3; i++) {
+
+  for (let i = 0; i < 3; i++) {
     requiredVersion[i] = isNaN(parseInt(requiredVersion[i])) ? 0 : parseInt(requiredVersion[i]);
     checkedVersion[i] = isNaN(parseInt(checkedVersion[i])) ? 0 : parseInt(checkedVersion[i]);
   }
-  
+
   if (checkedVersion[0] > requiredVersion[0]) return false;
   if (checkedVersion[0] < requiredVersion[0]) return true;
   if (checkedVersion[1] > requiredVersion[1]) return false;
@@ -129,18 +129,18 @@ export function compareVersions(checkedVersion, requiredVersion) {
   return true;
 }
 
-export function compatibleCore(compatibleVersion){
+export function compatibleCore(compatibleVersion) {
   const split = compatibleVersion.split(".");
   if (split.length == 1) compatibleVersion = `${compatibleVersion}.0`;
   let coreVersion = game.version;
   return compareVersions(compatibleVersion, coreVersion);
 }
 
-export function generateId(){
-  var result           = '';
-  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+export function generateId() {
+  var result = '';
+  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   var charactersLength = characters.length;
-  for ( var i = 0; i < 16; i++ ) {
+  for (var i = 0; i < 16; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
@@ -150,7 +150,7 @@ export class MovingAverage {
   val = [];
   count = 0;
   size = 10;
-  complete=false;
+  complete = false;
 
   constructor(size = 10) {
     this.size = size;
@@ -171,20 +171,20 @@ export class MovingAverage {
 
     let newVal = 0;
     const len = this.complete ? this.size : this.count;
-    for (let i=0; i<len; i++) {
+    for (let i = 0; i < len; i++) {
       newVal += this.val[i];
     }
 
-    return newVal/len
+    return newVal / len
   }
 }
 
 export function registerLayer() {
-  const layers =  {
+  const layers = {
     materialPlane: {
-          layerClass: MaterialPlaneLayer,
-          group: "primary"
-      }
+      layerClass: MaterialPlaneLayer,
+      group: "primary"
+    }
   }
 
   CONFIG.Canvas.layers = foundry.utils.mergeObject(Canvas.layers, layers);
@@ -221,10 +221,9 @@ export class MaterialPlaneLayer extends CanvasLayer {
     return this;
   }
 
-  async _draw() {}
+  async _draw() { }
 
   async draw() {
     super.draw();
   }
 }
-

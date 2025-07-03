@@ -38,14 +38,14 @@ export class IRtoken {
         if (data == undefined && this.token == undefined) return;
 
         //Prevent movement if game is paused
-        // if (game.paused) {
-        //     if (!pausedMessage) {
-        //         pausedMessage = true;
-        //         ui.notifications.warn("Material Plane: "+game.i18n.localize("MaterialPlane.Notifications.GamePaused"));
-        //         setTimeout(()=> pausedMessage = false, 5000);
-        //     }
-        //     return true;
-        // }
+        if (game.paused) {
+            if (!pausedMessage) {
+                pausedMessage = true;
+                ui.notifications.warn("Material Plane: "+game.i18n.localize("MaterialPlane.Notifications.GamePaused"));
+                setTimeout(()=> pausedMessage = false, 5000);
+            }
+            return true;
+        }
 
         if (data != undefined) {
             let coords = {x:data.x,y:data.y}
